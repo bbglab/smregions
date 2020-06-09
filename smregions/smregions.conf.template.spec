@@ -1,0 +1,6 @@
+reference_genome = string(default=None)
+muts_min = integer(default=2)
+sampling = integer(default=100000)
+sampling_chunk = integer(default=100)
+seed = integer(default=None)
+cores = integer(default=None)
