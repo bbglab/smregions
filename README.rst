@@ -16,14 +16,12 @@ Usage
 Use ``-h`` or ``--help`` to access the help information.
 
 
-
-
 .. _readme install:
 
 Installation
 ------------
 
-.. TODO
+To install this package, clone the repo and install it with pip.
 
 
 .. _readme license:
@@ -31,4 +29,5 @@ Installation
 License
 -------
 
-.. TODO
+This software is released under Apache Software License 2.0
+
