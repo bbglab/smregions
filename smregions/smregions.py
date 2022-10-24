@@ -87,11 +87,12 @@ class SMRegions(object):
             signature = bgsignature.file.load(self.signature_file)
 
         # Create one executor per element
-        element_executors = [ElementExecutor(element_id, muts, elements[element_id],
+        # mEdit. It passes the element and all the mutation in a single list (+ the muts_perSample dictionary per element)
+        element_executors = [ElementExecutor(element_id, sum(muts_perSample.values(), []), elements[element_id],
                                              regions_of_interest[element_id],
-                                             signature, self.configuration, np.random.randint(0, 2**32-1))
-                             for element_id, muts in sorted(mutations.items())
-                             if len(muts) >= self.configuration['muts_min']]
+                                             signature, self.configuration, muts_perSample, np.random.randint(0, 2 ** 32 - 1))
+                             for element_id, muts_perSample in sorted(mutations.items())
+                             if len(sum(muts_perSample.values(), [])) >= self.configuration['muts_min']]
 
         # Sort executors to compute first the ones that have more mutations
         element_executors = sorted(element_executors, key=lambda e: -len(e.muts))

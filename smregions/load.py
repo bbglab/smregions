@@ -135,7 +135,8 @@ def load_and_map_variants(variants_file, elements_file, regions_of_interest_file
     elements_tree = load_elements_tree(elements_file)
 
     # Mapping mutations
-    variants_dict = defaultdict(list)
+    #mEdit. List of lists instead single list
+    variants_dict = defaultdict(lambda: defaultdict(list))
     logger.info("Mapping mutations")
     i = 0
     show_small_progress_at = 100000
@@ -156,7 +157,7 @@ def load_and_map_variants(variants_file, elements_file, regions_of_interest_file
 
         for interval in intervals:
             element = interval.data
-            variants_dict[element].append(r)
+            variants_dict[element][r['SAMPLE']].append(r)
 
     if i > show_small_progress_at:
         print('{} [{} muts]'.format(' '*(((show_big_progress_at-(i % show_big_progress_at)) // show_small_progress_at)+1), i), flush=True)
